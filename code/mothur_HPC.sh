@@ -2,8 +2,8 @@
 
 # Define the input and output directories with correct syntax
 input_dir='/volumes/homehpc/storage/finished_projects/UrsaM/comparison_local_HPC/raw_reads_comparsion'
-output_dir='/volumes/homehpc/storage/finished_projects/UrsaM/comparison_local_HPC/mothur_out_HPC_8'
-number_threads='8'
+output_dir='/volumes/homehpc/storage/finished_projects/UrsaM/comparison_local_HPC/mothur_out_HPC_14'
+number_threads='14'
 
 # Script is in majority prepared as recommended in Mothur MiSeq SOP, adjusted for V3V4 region of 16S rRNA.
 # All important outputs have prefix final.* , the rest can be discarded after analysis
@@ -66,11 +66,11 @@ remove.lineage(fasta=stability.trim.contigs.good.unique.good.filter.unique.precl
 rename.file(fasta=current, count=current, taxonomy=current, prefix=final8_)
 
 # OTU
-cluster.split(fasta=final8_.fasta, count=final8_.count_table, taxonomy=final8_.taxonomy, taxlevel=4, cutoff=0.03)
-make.shared(list=final8_.opti_mcc.list, count=final8_.count_table, label=0.03)
-classify.otu(list=final8_.opti_mcc.list, count=final8_.count_table, taxonomy=final8_.taxonomy, label=0.03)
+cluster.split(fasta=final.fasta, count=final.count_table, taxonomy=final.taxonomy, taxlevel=4, cutoff=0.03)
+make.shared(list=final.opti_mcc.list, count=final.count_table, label=0.03)
+classify.otu(list=final.opti_mcc.list, count=final.count_table, taxonomy=final.taxonomy, label=0.03)
 
 # ASV 
-make.shared(count=final8_.count_table)
-classify.otu(list=final8_.asv.list, count=final8_.count_table, taxonomy=final8_.taxonomy, label=ASV)
-get.oturep(column=stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.dist, list=final8_.asv.list, fasta=final8_.fasta, count=final8_.count_table) 
+make.shared(count=final.count_table)
+classify.otu(list=final.asv.list, count=final.count_table, taxonomy=final.taxonomy, label=ASV)
+get.oturep(column=stability.trim.contigs.good.unique.good.filter.unique.precluster.denovo.vsearch.pick.dist, list=final.asv.list, fasta=final.fasta, count=final.count_table) 
